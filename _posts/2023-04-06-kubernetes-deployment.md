@@ -25,6 +25,69 @@ Deployment是一类工作负载（workloads）它的提供了声明式管理Repl
 
 ### 创建
 
+创建一个文件如下：
+
+nginx-deployment.yaml
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+```
+
+1、创建名为nginx-deployment的deployment：
+
+```shell
+kubectl apply -f nginx-deployment.yaml
+```
+
+2、查看deployment状态
+
+```shell
+kubectl get deployments
+```
+
+>上述命令不指定命名空间，即返回默认命名空间下deployments
+
+展示信息如下：
+- **NAME** 罗列出默认命名空间内的deployment名称.
+- **READY** 展示可用的副本数量. 格式： ready/desired.
+- **UP-TO-DATE** 展示副本更新到期望值的数量.
+- **AVAILABLE** 展示可用的副本数量.
+- **AGE** 展示应用运行时间.
+
+3、查看rollout status
+
+```shell
+kubectl rollout status deployment/nginx-deployment
+```
+
+4、查看副本集
+
+```shell
+kubectl get rs
+```
+
+
+
 ### 更新
 
 ### 回滚

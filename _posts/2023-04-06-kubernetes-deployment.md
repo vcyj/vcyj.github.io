@@ -80,12 +80,15 @@ kubectl get deployments
 kubectl rollout status deployment/nginx-deployment
 ```
 
-4、查看副本集
+4、查看 ReplicaSet
 
 ```shell
 kubectl get rs
 ```
 
+ ReplicaSet的名称格式：[DEPLOYMENT-NAME]-[HASH]
+
+5、查看
 
 
 ### 更新

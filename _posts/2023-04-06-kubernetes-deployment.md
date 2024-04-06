@@ -16,4 +16,8 @@ tags:
 
 ## 正文
 
+Deployment是一类工作负载（workloads）它的作用是用于管理ReplicaSet，通过ReplicaSet间接的去管理对应的副本对应的pod。
+
+
+
 待完成。。。。。。

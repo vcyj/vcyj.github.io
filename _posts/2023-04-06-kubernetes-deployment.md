@@ -8,6 +8,7 @@ header-img: img/post-bg-cook.jpg
 catalog: true
 tags:
     - KUBERNETES
+    - Deployment
 ---
 
 ## 前言
@@ -16,7 +17,14 @@ tags:
 
 ## 正文
 
-Deployment是一类工作负载（workloads）它的作用是用于管理ReplicaSet，通过ReplicaSet间接的去管理对应的副本对应的pod。
+Deployment是一类工作负载（workloads）它的提供了声明式管理ReplicaSet以及pods的方式。deployment通过spec来描述期望的状态，deployment controller新建RepicaSet，按照一个受控的速率，将当前的pod状态变为期望的状态。
+
+> 勿手动直接管理ReplicaSets
+
+下面是列举的Deployments的常规用法：
+
+
+
 
 
 

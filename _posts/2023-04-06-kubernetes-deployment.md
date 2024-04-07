@@ -139,6 +139,70 @@ Waiting for rollout to finish: 2 out of 3 new replicas have been updated...
 ```
 deployment "nginx-deployment" successfully rolled out
 ```
+若上线成功
+
+此时，执行命令，查看副本情况，新副本扩容完毕，旧副本缩容完毕
+
+```shell
+kubectl get rs
+```
+
+output如下：
+
+```
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-1564180365   3         3         3       6s
+nginx-deployment-2035384211   0         0         0       36s
+```
+
+此时，执行命令，查看pod情况，也能看到新的pod
+
+下次你想要更新pod，只需要更新Deployment中的Pod template即可。
+
+若你要查看Deployment的细节信息
+
+执行命令如下(其他场景可以指定namespcae)：
+
+```shell
+kubectl describe deployments
+```
+output如下：
+
+```
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 04 Apr 2024 21:32:58 -0700
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=nginx
+Replicas:               10 desired | 10 updated | 10 total | 10 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:1.16.1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  nginx-deployment-86dcfdf4c6 (0/0 replicas created)
+NewReplicaSet:   nginx-deployment-848dd6cfb5 (10/10 replicas created)
+Events:          <none>
+```
+
+通过 *RollingUpdateStrategy* 的字段，设置了max surge以及max unavailable，分别代表最大可以承受的，最大可以不通信的，他们的比较对象都是*desired number* 相当于max surge，同时可以运行125% * desird number ，同时有25%可以不在线，就是75% * desired number。
+
+它的执行顺序，新创建新的之后杀死旧的，在新的没有创建之前，不会杀旧的pod。
+
 
 
 ### 回滚

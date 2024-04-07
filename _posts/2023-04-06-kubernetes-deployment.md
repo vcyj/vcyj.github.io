@@ -88,16 +88,59 @@ kubectl get rs
 
  ReplicaSet的名称格式：[DEPLOYMENT-NAME]-[HASH]
 
-5、查看
+5、查看pods的labels信息
 
+```shell
+kubectl get pods --show-labels
+```
+
+```shell
+
+```
 
 ### 更新
+
+Deployment的更新仅针对Pod template (that is, .spec.template)改变，比如labels和image的更新，普通的扩容缩容不会触发rollout（滚动更新）
+
+1、镜像更新，更新为nginx:1.16.1
+
+```shell
+kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1
+
+```
+
+output如下：
+
+```
+deployment.apps/nginx-deployment image updated
+```
+
+通过edit更新，更新字段 *.spec.template.spec.containers[0].image* from nginx:1.14.2 to nginx:1.16.1
+
+```shell
+kubectl edit deployment/nginx-deployment
+```
+ 
+
+
 
 ### 回滚
 
 ### 扩容
 
 ### 清理
+
+### 状态
+
+#### 失败
+
+- 资源配额不足
+- Readiness Probe failure（就绪性探针失败）
+- 拉去镜像错误
+- 权限不足
+- limit ranges
+- 
 
 
 

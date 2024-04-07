@@ -2,7 +2,7 @@
 layout:     post
 title:      KUBERNETES详解
 subtitle:   Deployment的使用
-date:       2024-04-06
+date:       2024-04-08
 author:     caoyj
 header-img: img/post-bg-cook.jpg
 catalog: true
@@ -121,8 +121,24 @@ deployment.apps/nginx-deployment image updated
 ```shell
 kubectl edit deployment/nginx-deployment
 ```
- 
 
+
+2、查询rollout的状态
+
+```shell
+kubectl rollout status deployment/nginx-deployment
+```
+output如下：
+
+```
+Waiting for rollout to finish: 2 out of 3 new replicas have been updated...
+```
+
+或者
+
+```
+deployment "nginx-deployment" successfully rolled out
+```
 
 
 ### 回滚

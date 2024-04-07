@@ -19,3 +19,4 @@ tags:
 
 ReplicaSet的主要用途是管理副本，管理pods的数量以及期望状态和当前状态，管理pods的扩容以及所容。
 不可以直接对ReplicaSet进行操作，通过Deployment对Rp进行管理。
+文章脉络：简要介绍什么是ReplicaSet,罗列他的使用方式，最后补充所有的细节知识

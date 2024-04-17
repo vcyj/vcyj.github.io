@@ -1,0 +1,24 @@
+---
+layout:     post
+title:      linux
+subtitle:   指令积累
+date:       2024-04-17
+author:     caoyj
+header-img: img/post-bg-coffee.jpeg
+catalog: true
+tags:
+    - linux
+---
+
+## 前言
+
+日拱一卒，功不唐捐
+
+## 正文
+
+1. 大文件删除：
+
+```shell
+rsync -rv --delete --exclude '1.txt' /export/test_2/ /export/test_1/
+```
+

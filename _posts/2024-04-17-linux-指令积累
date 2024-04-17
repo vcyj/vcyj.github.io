@@ -18,6 +18,10 @@ tags:
 
 1. 大文件删除：
 
+test_2是空文件夹
+test_1是需要去清理的文件夹
+exclude可以改为exclude-from。这样可以指定更多文件名称。
+
 ```shell
 rsync -rv --delete --exclude '1.txt' /export/test_2/ /export/test_1/
 ```
